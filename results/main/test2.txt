@@ -1,0 +1,51 @@
+========== ROBOT KINEMATICS PIPELINE ==========
+
+Enter Link Constants:
+d1: 1.2
+a2: 2.3
+a3: 3.4
+d4: 4.3
+d5: 3.2
+d6: 2.1
+
+Enter Desired Position:
+x: 7.651
+y: -5.15
+z: 4.0339
+
+Enter Desired Orientation (RPY in degrees):
+Roll: -144.37
+Pitch: 0.8267
+Yaw: -159.2887
+
+Desired Transformation Matrix:
+[[-0.935277 -0.279591  0.216993  7.651   ]
+ [-0.353623  0.763241 -0.540754 -5.15    ]
+ [-0.014428 -0.582488 -0.812711  4.0339  ]
+ [ 0.        0.        0.        1.      ]]
+
+Converged in 9 iterations (attempt 1).
+
+Recovered Joint Angles (degrees):
+[    2.300454  1864.790474  2485.455734 -5326.74636     56.699656
+   787.800377]
+
+--- IK Verification ---
+Position Error = 1.6550181582502363e-07
+Orientation Error = 4.9172394853918425e-15
+
+IK Solution Valid
+
+Jacobian Matrix:
+[[ 5.15     -2.831616 -0.752354  0.958903  0.19848   0.      ]
+ [ 7.651    -0.113752 -0.030224  0.038521  1.764578  0.      ]
+ [-0.        7.438114  6.458476  3.521322 -1.121103 -0.      ]
+ [ 0.        0.04014   0.04014   0.04014   0.971587  0.216993]
+ [ 0.       -0.999194 -0.999194 -0.999194  0.039031 -0.540754]
+ [ 1.        0.        0.        0.        0.233443 -0.812711]]
+
+--- Singularity Check ---
+Determinant of Jacobian = -26.048466897883085
+Robot is NOT singular
+
+========== EXECUTION COMPLETE ==========

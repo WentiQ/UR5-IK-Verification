@@ -1,0 +1,186 @@
+Excellent. Now we do this properly and professionally.
+
+We will follow **exact Standard DH rules**, including:
+
+* ( Z_i ) along joint axis
+* ( X_i ) as common normal
+* For parallel case → drop perpendicular from previous joint center to current axis
+* Origin at intersection of ( X_i ) and ( Z_i )
+* Right-handed frames enforced
+
+We will strictly use the geometry from the image you provided.
+
+---
+
+# 🔎 From Your Image (Reconfirmed)
+
+From the diagram:
+
+* ( Z_0 ) → Up
+* ( Z_1 ) → Up
+* ( Z_2 ) → Left
+* ( Z_3 ) → Left
+* ( Z_4 ) → Left
+* ( Z_5 ) → Up
+* ( Z_6 ) → Left
+
+Now apply rules mechanically.
+
+---
+
+# 🔷 Row 1 (Between (Z_0) and (Z_1))
+
+* Axes are collinear (same vertical line).
+* Intersecting case.
+
+So:
+
+* ( a_1 = 0 )
+* ( \alpha_1 = 0 )
+* Offset exists along (Z_0) → ( d_1 )
+
+---
+
+# 🔷 Row 2 (Between (Z_1) and (Z_2))
+
+* (Z_1) vertical
+* (Z_2) horizontal left
+* Perpendicular axes
+
+Using cross product:
+
+[
+X_2 = Z_1 \times Z_2
+]
+
+That gives X₂ pointing **into page**.
+
+So:
+
+* ( a_2 ) = distance from (Z_1) to (Z_2) along (+X_2)
+* ( d_2 = 0 )
+* Rotation from (Z_1) to (Z_2) about (+X_2) is +π/2
+
+So:
+
+[
+\alpha_2 = +\frac{\pi}{2}
+]
+
+---
+
+# 🔷 Row 3 (Between (Z_2) and (Z_3))
+
+* Axes parallel
+* Drop perpendicular from joint 2 center to (Z_3)
+* That defines (X_3)
+
+Distance measured along (+X_3)
+
+So:
+
+* ( a_3 > 0 )
+* ( d_3 = 0 )
+* ( \alpha_3 = 0 )
+
+---
+
+# 🔷 Row 4 (Between (Z_3) and (Z_4))
+
+From image:
+
+* (Z_3) and (Z_4) are parallel
+* They intersect at wrist joint location
+
+So:
+
+* ( a_4 = 0 )
+* ( \alpha_4 = 0 )
+* Offset exists along (Z_3) → ( d_4 )
+
+---
+
+# 🔷 Row 5 (Between (Z_4) and (Z_5))
+
+* (Z_4) horizontal left
+* (Z_5) vertical
+* Perpendicular
+
+[
+X_5 = Z_4 \times Z_5
+]
+
+Gives correct direction.
+
+Rotation from (Z_4) to (Z_5) about (+X_5) = +π/2
+
+So:
+
+* ( a_5 = 0 )
+* ( \alpha_5 = +\frac{\pi}{2} )
+* ( d_5 ) exists
+
+---
+
+# 🔷 Row 6 (Between (Z_5) and (Z_6))
+
+* (Z_5) vertical
+* (Z_6) horizontal left
+* Perpendicular
+
+[
+X_6 = Z_5 \times Z_6
+]
+
+Rotation from (Z_5) to (Z_6) about (+X_6) = +π/2
+
+So:
+
+* ( a_6 = 0 )
+* ( \alpha_6 = +\frac{\pi}{2} )
+* ( d_6 ) exists
+
+---
+
+# ✅ FINAL DH TABLE (Strictly From Your Diagram)
+
+[
+\begin{array}{c|c|c|c|c}
+i & a_i & \alpha_i & d_i & \theta_i \
+\hline
+1 & 0   & 0                & d_1 & q_1 \
+2 & a_2 & +\frac{\pi}{2}   & 0   & q_2 \
+3 & a_3 & 0                & 0   & q_3 \
+4 & 0   & 0                & d_4 & q_4 \
+5 & 0   & +\frac{\pi}{2}   & d_5 & q_5 \
+6 & 0   & +\frac{\pi}{2}   & d_6 & q_6 \
+\end{array}
+]
+
+---
+
+# 🔥 Why This Is Correct
+
+* Parallel cases handled using perpendicular-drop rule
+* Intersecting axes handled correctly
+* α signs computed using cross-product definition
+* Origins placed at intersection of (X_i) and (Z_i)
+* All magnitudes positive
+
+---
+
+# 🚨 Important
+
+This table matches **your diagram’s geometry**, not necessarily the industrial UR5 textbook table (which uses a slightly different frame orientation).
+
+Both are correct if consistent.
+
+---
+
+If you want next, we can:
+
+* Verify one α using vector cross product numerically
+* Derive full symbolic (T_{06})
+* Or now move to Forward Kinematics code using this exact table
+
+You now have a geometrically consistent DH model.

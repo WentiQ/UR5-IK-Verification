@@ -1,0 +1,538 @@
+Excellent 👍
+Now I will give you a **complete, structured, examiner-level guide** — from zero to final submission — including:
+
+* Exact order of work
+* What to calculate by hand
+* What to implement in software
+* Rules to follow
+* How to avoid losing marks
+* How to structure report
+* How to validate everything
+
+This is your **official execution roadmap** for the UR5 IK Verification Tool.
+
+---
+
+# 🔷 PROJECT OBJECTIVE (From Assignment)
+
+As stated in the document (page 1–3 ), your tool must:
+
+1. Model UR5 using DH parameters
+2. Compute Forward Kinematics
+3. Compute Inverse Kinematics
+4. Compute Jacobian
+5. Detect singularities
+6. Verify IK using FK
+7. Clearly indicate whether IK is valid
+
+No physical robot required.
+
+---
+
+# 🟢 OVERALL PROJECT RULES
+
+Follow these strictly:
+
+### RULE 1 — Use Standard DH Convention
+
+Do NOT mix modified DH unless clearly stated.
+
+---
+
+### RULE 2 — Use Radians Only
+
+All joint angles must be in radians in code.
+
+---
+
+### RULE 3 — Code Must Be Modular
+
+As required in guidelines (page 2 ):
+
+Separate files for:
+
+* DH
+* FK
+* IK
+* Jacobian
+* Verification
+
+---
+
+### RULE 4 — Show Hand Calculations
+
+You must show:
+
+* DH parameter derivation
+* At least 1 full transformation matrix derivation
+* Jacobian column derivation
+* IK algorithm explanation
+
+---
+
+### RULE 5 — Show Numerical Validation
+
+Your tool must print:
+
+* End-effector pose
+* IK solution
+* Position error
+* Orientation error
+* Jacobian determinant
+* Singular or not
+
+---
+
+# 🟢 STEP-BY-STEP PROCESS (FROM SCRATCH)
+
+---
+
+# 🔵 STEP 1 — Understand UR5 Structure
+
+UR5 has:
+
+* 6 revolute joints
+* Spherical wrist (last 3 joints intersect)
+
+You must understand:
+
+* Joint axes
+* Link lengths
+* Frame assignment
+
+Draw coordinate frames in your notebook.
+
+---
+
+# 🔵 STEP 2 — Create DH Table (HANDWRITTEN + CODE)
+
+## 2.1 Handwritten Work
+
+You must:
+
+1. Draw frames 0 to 6
+2. Identify:
+
+   * ai
+   * αi
+   * di
+   * θi
+
+Write the complete DH table manually.
+
+Explain:
+
+* Why α1 = π/2
+* Why a2 = -0.425
+* Why d1 ≠ 0
+
+This proves understanding.
+
+---
+
+## 2.2 Implement in Code
+
+Create:
+
+```
+dh_model.py
+```
+
+Write a function:
+
+```
+def dh_transform(a, alpha, d, theta):
+```
+
+Return 4×4 transformation matrix.
+
+---
+
+# 🔵 STEP 3 — Derive One Matrix Manually
+
+Write full derivation:
+
+[
+T_i =
+\begin{bmatrix}
+\cos\theta & -\sin\theta \cos\alpha & ...
+\end{bmatrix}
+]
+
+Substitute α value.
+
+Simplify fully.
+
+Only 1–2 matrices needed manually.
+
+---
+
+# 🔵 STEP 4 — Implement Forward Kinematics
+
+File:
+
+```
+forward_kinematics.py
+```
+
+Compute:
+
+[
+T_{06} = T_1 T_2 T_3 T_4 T_5 T_6
+]
+
+Extract:
+
+Position:
+[
+x, y, z
+]
+
+Orientation:
+Rotation matrix or RPY
+
+---
+
+## Validation Rule
+
+Test with known configuration:
+
+```
+q = [0, 0, 0, 0, 0, 0]
+```
+
+Check if output looks physically reasonable.
+
+---
+
+# 🔵 STEP 5 — Implement Jacobian
+
+File:
+
+```
+jacobian.py
+```
+
+---
+
+## 5.1 Handwritten Derivation
+
+Write:
+
+[
+J_v = z_{i-1} \times (o_n - o_{i-1})
+]
+
+[
+J_\omega = z_{i-1}
+]
+
+Show derivation of column 1 manually.
+
+---
+
+## 5.2 Code Implementation
+
+Steps:
+
+1. Compute all intermediate transformations
+2. Extract:
+
+   * zi
+   * oi
+3. Build 6×6 Jacobian
+
+---
+
+## 5.3 Singularity Rule
+
+Compute:
+
+```
+det(J)
+```
+
+If:
+
+```
+|det(J)| < 10^-6
+```
+
+→ Singular
+
+Print warning.
+
+---
+
+# 🔵 STEP 6 — Implement Inverse Kinematics
+
+You have two options:
+
+### Option A — Analytical IK
+
+Hard, long derivation.
+
+### Option B — Numerical IK (Recommended)
+
+Use:
+
+Pseudo-inverse method:
+
+[
+\Delta q = J^+ e
+]
+
+---
+
+## 6.1 IK Algorithm (Must Write in Report)
+
+1. Initialize q
+2. Compute FK
+3. Compute error
+4. Compute Jacobian
+5. Update q
+6. Repeat until convergence
+
+---
+
+## 6.2 Convergence Rules
+
+Stop if:
+
+Position error < 1e-4
+Orientation error < 1e-4
+OR max iterations reached
+
+---
+
+# 🔵 STEP 7 — IK Verification (Very Important)
+
+As required in document (page 2 ):
+
+After computing IK:
+
+1. Apply FK to obtained joint angles
+2. Compare with desired pose
+
+---
+
+## Compute Errors
+
+Position error:
+
+[
+||p_d - p_c||
+]
+
+Orientation error:
+
+Use rotation matrix difference.
+
+---
+
+## Validation Condition
+
+If both errors small:
+
+```
+IK Solution Valid
+```
+
+Else:
+
+```
+IK Solution Invalid
+```
+
+This must be clearly printed.
+
+---
+
+# 🔵 STEP 8 — Main Execution Flow
+
+File:
+
+```
+main.py
+```
+
+Should:
+
+1. Define desired pose
+2. Call IK
+3. Call verification
+4. Compute Jacobian
+5. Check singularity
+6. Print results clearly
+
+---
+
+# 🔵 STEP 9 — Testing Strategy
+
+You must test:
+
+### Test 1 — Random configuration
+
+### Test 2 — Straight arm
+
+### Test 3 — Near singularity
+
+### Test 4 — Multiple initial guesses
+
+Include results in report.
+
+---
+
+# 🔵 STEP 10 — Report Structure
+
+Your report.pdf must contain:
+
+---
+
+## 1️⃣ Introduction
+
+Explain problem statement.
+
+---
+
+## 2️⃣ DH Modeling
+
+* Frame assignment
+* DH table
+* Handwritten derivations
+* One transformation matrix expanded
+
+---
+
+## 3️⃣ Forward Kinematics
+
+* Formula
+* Matrix multiplication concept
+* Example output
+
+---
+
+## 4️⃣ Jacobian
+
+* Formula
+* One column derivation
+* Singularity explanation
+
+---
+
+## 5️⃣ Inverse Kinematics
+
+* Method chosen
+* Algorithm explanation
+* Convergence criteria
+
+---
+
+## 6️⃣ IK Verification
+
+* Error computation formula
+* Numerical results
+* Validity statement
+
+---
+
+## 7️⃣ Results
+
+Include screenshots:
+
+* FK output
+* IK solution
+* Error values
+* Jacobian determinant
+
+---
+
+## 8️⃣ Conclusion
+
+Discuss:
+
+* Accuracy
+* Observations
+* Singularities found
+
+---
+
+# 🟢 SUBMISSION RULES (Very Important)
+
+As per assignment (page 3 ):
+
+Folder must be:
+
+```
+UR5_IK_Verification_<YourName>.zip
+```
+
+Structure:
+
+```
+UR5_IK_Verification/
+│── report.pdf
+│── code/
+│── results/
+```
+
+---
+
+# 🟢 COMMON MISTAKES (Avoid These)
+
+❌ Using degrees
+❌ Mixing modified and standard DH
+❌ Not verifying IK
+❌ No singularity detection
+❌ Messy output formatting
+❌ No handwritten derivations
+
+---
+
+# 🟢 HOW EXAMINER WILL GRADE YOU
+
+From evaluation criteria (page 3 ):
+
+| Criteria            | What They Check          |
+| ------------------- | ------------------------ |
+| Correct DH          | Frame assignment correct |
+| FK accuracy         | Matrix correct           |
+| IK accuracy         | Converges properly       |
+| Proper verification | Error calculation        |
+| Code clarity        | Modular & readable       |
+
+---
+
+# 🟢 WHAT A PERFECT PROJECT LOOKS LIKE
+
+✔ Clean modular Python
+✔ Small position error (<1e-4)
+✔ Proper singularity detection
+✔ Clear math derivation
+✔ Organized report
+✔ Clean folder structure
+
+That’s distinction-level work.
+
+---
+
+# 🔥 Final Advice
+
+Think like a robotics software engineer:
+
+* Math proves understanding
+* Code proves implementation
+* Verification proves correctness
+
+This is exactly how real industrial robot controllers are validated.
+
+---
+
+If you want next, I can:
+
+* Provide full Python modular template
+* Help you write report section by section
+* Walk through numerical IK implementation step-by-step
+* Help you plan handwritten pages layout
+
+Tell me your current progress and I’ll guide you precisely.

@@ -1,0 +1,22 @@
+
+========== Numerical IK Solver ==========
+
+Enter Link Constants:
+d1: 1.2
+a2: 2.3
+a3: 3.4
+d4: 4.3
+d5: 3.2
+d6: 2.1
+
+Enter Desired Position:
+x: -90
+y: -180
+z: 0
+
+Enter Desired Orientation (RPY in degrees):
+Roll: 90
+Pitch: 0
+Yaw: 180
+
+Failed to converge.
