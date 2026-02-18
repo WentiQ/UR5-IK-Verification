@@ -24,19 +24,19 @@ def dh_transform(a, alpha, d, theta):
 def compute_transformations(q, link_params):
 
     d1 = link_params["d1"]
-    a2 = link_params["a2"]
     a3 = link_params["a3"]
+    a4 = link_params["a4"]
     d4 = link_params["d4"]
     d5 = link_params["d5"]
     d6 = link_params["d6"]
 
     dh_table = [
-        (0,   np.pi/2, d1, q[0]),
-        (a2,  0,       0,  q[1]),
-        (a3,  0,       0,  q[2]),
-        (0,   np.pi/2, d4, q[3]),
-        (0,  -np.pi/2, d5, q[4]),
-        (0,   0,       d6, q[5]),
+        (0,   0,        d1, q[0]),
+        (0,   np.pi/2,  0,  q[1]),
+        (a3,  0,        0,  q[2]),
+        (a4,  0,        d4, q[3]),
+        (0,  -np.pi/2,  d5, q[4]),
+        (0,   np.pi/2,  d6, q[5]),
     ]
 
     T_list = [np.eye(4)]  # T_00
@@ -111,8 +111,8 @@ if __name__ == "__main__":
 
     link_params = {
         "d1": float(input("d1: ")),
-        "a2": float(input("a2: ")),
         "a3": float(input("a3: ")),
+        "a4": float(input("a4: ")),
         "d4": float(input("d4: ")),
         "d5": float(input("d5: ")),
         "d6": float(input("d6: "))

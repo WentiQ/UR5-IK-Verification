@@ -39,8 +39,8 @@ if __name__ == "__main__":
     print("Enter Link Constants:")
     link_params = {
         "d1": float(input("d1: ")),
-        "a2": float(input("a2: ")),
         "a3": float(input("a3: ")),
+        "a4": float(input("a4: ")),
         "d4": float(input("d4: ")),
         "d5": float(input("d5: ")),
         "d6": float(input("d6: "))

@@ -3,24 +3,23 @@
 
 Enter Link Constants:
 d1: 1
-a2: 1
 a3: 1
+a4: 1
 d4: 1
 d5: 1
 d6: 1
 
 Enter Desired Position:
 x: 0
-y: -2
+y: 2
 z: 4
 
 Enter Desired Orientation (RPY in degrees):
-Roll: -90
+Roll: 90
 Pitch: 0
-Yaw: -180
+Yaw: 0
 
-Converged in 15 iterations (attempt 1).
+Converged in 10 iterations (attempt 1).
 
 Recovered Joint Angles (degrees):
-[   -0.294401  -270.005996 -1080.592698  1170.90903    360.294384
-    -0.310353]
+[   8.686088  171.148711   89.606122    0.457371  269.936507 -179.8348  ]
