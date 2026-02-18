@@ -1,0 +1,41 @@
+
+========== UR5 Forward Kinematics ==========
+
+Enter Joint Angles (in DEGREES):
+q1 (deg): 0
+q2 (deg): 0
+q3 (deg): 00
+q4 (deg): 0
+q5 (deg): 0
+q6 (deg): 0
+
+Enter Link Constants:
+d1: 1
+a3: 1
+a4: 1
+d4: 1
+d5: 1
+d6: 1
+
+========================================
+T_06 (End Effector Pose):
+========================================
+[[ 1.  0.  0.  2.]
+ [ 0.  0. -1. -2.]
+ [ 0.  1.  0.  2.]
+ [ 0.  0.  0.  1.]]
+
+--- Position ---
+x = 2.0
+y = -2.0
+z = 2.0
+
+--- Orientation (Rotation Matrix) ---
+[[ 1.  0.  0.]
+ [ 0.  0. -1.]
+ [ 0.  1.  0.]]
+
+--- Orientation (RPY in degrees) ---
+Roll  = 90.0
+Pitch = -0.0
+Yaw   = 0.0

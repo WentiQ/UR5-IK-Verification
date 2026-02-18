@@ -64,8 +64,8 @@ def compute_jacobian(q, link_params):
 
     for i in range(6):
 
-        z_i = T_list[i][0:3, 2]     # z axis of frame i
-        o_i = T_list[i][0:3, 3]     # origin of frame i
+        z_i = T_list[i+1][0:3, 2]     # z axis of frame i+1
+        o_i = T_list[i+1][0:3, 3]     # origin of frame i+1
 
         # Revolute joint
         J_v[:, i] = np.cross(z_i, (o_n - o_i))
