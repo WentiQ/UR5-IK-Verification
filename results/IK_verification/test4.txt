@@ -1,0 +1,32 @@
+
+========== Numerical IK Solver ==========
+
+Enter Link Constants:
+d1: 1
+a3: 1
+a4: 1
+d4: 1
+d5: 1
+d6: 1
+
+Enter Desired Position:
+x: 0.1339745962155613
+y: -2.232050807568877
+z:  3.7320508075688776
+
+Enter Desired Orientation (RPY in degrees):
+Roll: 69.6394
+Pitch:  -22.521
+Yaw:  74.0953
+
+Converged in 26 iterations.
+
+Recovered Joint Angles (degrees):
+[  1281.912383   1268.087604  20280.001428   2489.997109 -22379.99853
+   2200.000005]
+
+--- IK Verification ---
+Position Error = 1.2975298689095842e-05
+Orientation Error = 4.594988069655589e-07
+
+IK Solution Valid
